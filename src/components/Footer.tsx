@@ -29,8 +29,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-[#94A3B8] mb-6">
-              Bridging the gap between physical construction and digital media
-              with innovative solutions.
+              Bridging the gap with excellence
             </p>
 
             <div className="flex space-x-4">

@@ -1,308 +1,185 @@
 import { Link } from "wouter";
-import { Check, Building, Film } from "lucide-react";
+import { Building, Film, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { useState } from "react";
 
 const Home = () => {
+  const [hoveredCard, setHoveredCard] = useState<any>(null);
+
   return (
     <>
-      {/* Hero Section */}
-      <section
-        id="home"
-        className="relative overflow-hidden bg-gradient-to-r from-[#1E293B] to-[#1E293B] py-16 md:py-24"
-      >
-        {/* Decorative elements */}
+      {/* Hero Section with Division Choice */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#334155] min-h-screen flex items-center">
+        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute w-72 h-72 bg-[#FFC107] opacity-10 rounded-full -top-10 -left-10"></div>
-          <div className="absolute w-96 h-96 bg-[#9C27B0] opacity-10 rounded-full -bottom-20 -right-20"></div>
+          <div className="absolute w-96 h-96 bg-[#FFC107] opacity-5 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+          <div className="absolute w-96 h-96 bg-[#9C27B0] opacity-5 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-              <h1 className="font-poppins font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
-                <span className="block">Building Media &</span>
-                <span className="block">
-                  <span className="text-[#FFC107]">Construction</span> Solutions
-                </span>
-              </h1>
-              <p className="text-[#94A3B8] text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0">
-                We bridge the gap between physical and digital worlds with
-                innovative solutions for construction projects and media
-                productions.
-              </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
-                <Link href="/services">
-                  <Button className="bg-[#FFC107] hover:bg-opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105 text-center w-full sm:w-auto">
-                    Our Services
-                  </Button>
-                </Link>
-                <Link href="/portfolio">
-                  <Button className="bg-[#9C27B0] hover:bg-opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105 text-center w-full sm:w-auto">
-                    View Portfolio
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <div className="md:w-1/2 flex justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-                alt="DualCore Industries Modern Office"
-                className="rounded-lg shadow-2xl w-full max-w-lg transform md:rotate-3 transition-transform hover:rotate-0 duration-500"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section Preview */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 relative z-10 py-16">
+          {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">
-              About DualCore
-            </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
-              Our unique approach combines expertise in both construction and
-              media to deliver integrated solutions for the modern world.
+            <h1 className="font-poppins font-bold text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+              Welcome to{" "}
+              <span className="text-[#FFC107]">Rich Dad Investments</span>
+            </h1>
+            <p className="text-[#94A3B8] text-xl md:text-2xl mb-4 max-w-3xl mx-auto">
+              Two Divisions. One Vision. Endless Possibilities.
+            </p>
+            <p className="text-[#64748B] text-lg max-w-2xl mx-auto">
+              Choose your path to discover how we can transform your project
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center space-y-12 md:space-y-0 md:space-x-16">
-            <div className="md:w-1/2">
-              <div className="relative">
+          {/* Division Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Construction Division */}
+            <div
+              onMouseEnter={() => setHoveredCard("construction")}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative bg-gradient-to-br from-[#1E293B] to-[#0F172A] rounded-2xl overflow-hidden border-2 border-[#334155] hover:border-[#FFC107] transition-all duration-500 transform hover:scale-105 hover:shadow-2xl"
+            >
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0">
                 <img
-                  src="/34.jpg"
-                  alt="DualCore Team"
-                  className="rounded-lg shadow-xl w-full z-10 relative"
+                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800"
+                  alt="Construction"
+                  className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
                 />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#FFC107] rounded-lg hidden md:block"></div>
-                <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#9C27B0] rounded-lg hidden md:block"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent"></div>
+              </div>
+
+              {/* Content */}
+              <div className="relative p-8 md:p-12 h-full flex flex-col justify-between min-h-[500px]">
+                <div>
+                  <div className="w-20 h-20 bg-[#FFC107] bg-opacity-20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-opacity-30 transition-all duration-300">
+                    <Building className="h-10 w-10 text-[#FFC107]" />
+                  </div>
+
+                  <h2 className="font-poppins font-bold text-4xl md:text-5xl text-white mb-4">
+                    Construction
+                  </h2>
+
+                  <div className="w-20 h-1 bg-[#FFC107] mb-6 group-hover:w-32 transition-all duration-300"></div>
+
+                  <p className="text-[#94A3B8] text-lg mb-8">
+                    Building tomorrow's infrastructure today. From commercial
+                    complexes to residential dreams, we bring structural
+                    excellence to every project.
+                  </p>
+
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#FFC107] rounded-full mr-3"></div>
+                      Commercial & Industrial Buildings
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#FFC107] rounded-full mr-3"></div>
+                      Residential Development
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#FFC107] rounded-full mr-3"></div>
+                      Renovations & Remodeling
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#FFC107] rounded-full mr-3"></div>
+                      Project Management
+                    </li>
+                  </ul>
+                </div>
+
+                <Link href="/construction">
+                  <Button className="w-full bg-[#FFC107] hover:bg-[#FFD54F] text-[#0F172A] font-semibold py-4 rounded-xl transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 flex items-center justify-center text-lg">
+                    Explore Construction
+                    <ArrowRight
+                      className={`ml-2 h-5 w-5 transition-transform duration-300 ${
+                        hoveredCard === "construction" ? "translate-x-2" : ""
+                      }`}
+                    />
+                  </Button>
+                </Link>
               </div>
             </div>
 
-            <div className="md:w-1/2">
-              <h3 className="font-poppins font-semibold text-2xl md:text-3xl mb-6">
-                Our Story
-              </h3>
-              <p className="text-[#64748B] mb-6">
-                Founded in 2015, DualCore Industries emerged from a vision to
-                bridge the gap between physical construction and digital media.
-                What began as two separate ventures merged into a powerful
-                synergy that provides comprehensive solutions to our clients.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                <div className="bg-[#F8FAFC] p-6 rounded-lg">
-                  <div className="text-[#FFC107] text-xl mb-2">
-                    <Building className="h-6 w-6" />
-                  </div>
-                  <h4 className="font-poppins font-semibold text-lg mb-2">
-                    Construction Division
-                  </h4>
-                  <p className="text-[#64748B] text-sm">
-                    Specializing in commercial and residential projects with
-                    innovative building techniques and sustainable practices.
-                  </p>
-                </div>
-
-                <div className="bg-[#F8FAFC] p-6 rounded-lg">
-                  <div className="text-[#9C27B0] text-xl mb-2">
-                    <Film className="h-6 w-6" />
-                  </div>
-                  <h4 className="font-poppins font-semibold text-lg mb-2">
-                    Media Division
-                  </h4>
-                  <p className="text-[#64748B] text-sm">
-                    Creating compelling digital content, marketing materials,
-                    and immersive experiences for businesses of all sizes.
-                  </p>
-                </div>
+            {/* Media Division */}
+            <div
+              onMouseEnter={() => setHoveredCard("media")}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative bg-gradient-to-br from-[#1E293B] to-[#0F172A] rounded-2xl overflow-hidden border-2 border-[#334155] hover:border-[#9C27B0] transition-all duration-500 transform hover:scale-105 hover:shadow-2xl"
+            >
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0">
+                <img
+                  src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800"
+                  alt="Media Production"
+                  className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent"></div>
               </div>
 
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                <div className="flex items-center">
-                  <div className="text-[#FFC107] text-xl mr-2">
-                    <Check className="h-5 w-5" />
+              {/* Content */}
+              <div className="relative p-8 md:p-12 h-full flex flex-col justify-between min-h-[500px]">
+                <div>
+                  <div className="w-20 h-20 bg-[#9C27B0] bg-opacity-20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-opacity-30 transition-all duration-300">
+                    <Film className="h-10 w-10 text-[#9C27B0]" />
                   </div>
-                  <span className="font-medium">10+ Years Experience</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-[#9C27B0] text-xl mr-2">
-                    <Check className="h-5 w-5" />
-                  </div>
-                  <span className="font-medium">200+ Projects Completed</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-[#10B981] text-xl mr-2">
-                    <Check className="h-5 w-5" />
-                  </div>
-                  <span className="font-medium">50+ Team Members</span>
-                </div>
-              </div>
 
-              <div className="mt-8">
-                <Link href="/about">
-                  <Button className="bg-[#1E293B] hover:bg-opacity-90 text-white px-6 py-2.5 rounded-lg font-medium transition-all transform hover:scale-105">
-                    Learn More About Us
+                  <h2 className="font-poppins font-bold text-4xl md:text-5xl text-white mb-4">
+                    Media
+                  </h2>
+
+                  <div className="w-20 h-1 bg-[#9C27B0] mb-6 group-hover:w-32 transition-all duration-300"></div>
+
+                  <p className="text-[#94A3B8] text-lg mb-8">
+                    Crafting compelling stories through digital innovation. From
+                    concept to creation, we bring your brand's vision to life.
+                  </p>
+
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#9C27B0] rounded-full mr-3"></div>
+                      Video Production & Photography
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#9C27B0] rounded-full mr-3"></div>
+                      Digital Marketing Solutions
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#9C27B0] rounded-full mr-3"></div>
+                      Brand Development
+                    </li>
+                    <li className="flex items-center text-[#CBD5E1]">
+                      <div className="w-2 h-2 bg-[#9C27B0] rounded-full mr-3"></div>
+                      Content Strategy
+                    </li>
+                  </ul>
+                </div>
+
+                <Link href="/media">
+                  <Button className="w-full bg-[#9C27B0] hover:bg-[#AB47BC] text-white font-semibold py-4 rounded-xl transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 flex items-center justify-center text-lg">
+                    Explore Media
+                    <ArrowRight
+                      className={`ml-2 h-5 w-5 transition-transform duration-300 ${
+                        hoveredCard === "media" ? "translate-x-2" : ""
+                      }`}
+                    />
                   </Button>
                 </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Services Preview */}
-      <section className="py-16 md:py-24 bg-[#F8FAFC]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">
-              Our Services
-            </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
-              Comprehensive solutions spanning both construction and media to
-              meet all your project needs.
+          {/* Bottom CTA */}
+          <div className="text-center mt-16">
+            <p className="text-[#64748B] mb-4">
+              Not sure which division you need?
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Construction Services */}
-            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#FFC107]">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-[#FFC107] bg-opacity-10 rounded-full flex items-center justify-center text-[#FFC107] text-2xl">
-                  <Building className="h-6 w-6" />
-                </div>
-                <h3 className="font-poppins font-semibold text-2xl ml-4">
-                  Construction Services
-                </h3>
-              </div>
-
-              <ul className="space-y-4">
-                <li className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 bg-[#FFC107] bg-opacity-10 rounded-full flex items-center justify-center text-[#FFC107] text-xs">
-                      <Check className="h-3 w-3" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Commercial Construction
-                    </h4>
-                    <p className="text-[#64748B]">
-                      Full-service commercial construction with a focus on
-                      office spaces, retail outlets, and industrial facilities.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 bg-[#FFC107] bg-opacity-10 rounded-full flex items-center justify-center text-[#FFC107] text-xs">
-                      <Check className="h-3 w-3" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Residential Projects
-                    </h4>
-                    <p className="text-[#64748B]">
-                      Custom home building, renovations, and multi-family
-                      residential developments with attention to detail.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-
-              <div className="mt-8">
-                <Link href="/services">
-                  <Button className="bg-[#FFC107] hover:bg-opacity-90 text-white px-6 py-2.5 rounded-lg font-medium transition-all transform hover:scale-105">
-                    View All Construction Services
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Media Services */}
-            <div className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#9C27B0]">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-[#9C27B0] bg-opacity-10 rounded-full flex items-center justify-center text-[#9C27B0] text-2xl">
-                  <Film className="h-6 w-6" />
-                </div>
-                <h3 className="font-poppins font-semibold text-2xl ml-4">
-                  Media Services
-                </h3>
-              </div>
-
-              <ul className="space-y-4">
-                <li className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 bg-[#9C27B0] bg-opacity-10 rounded-full flex items-center justify-center text-[#9C27B0] text-xs">
-                      <Check className="h-3 w-3" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Content Production
-                    </h4>
-                    <p className="text-[#64748B]">
-                      High-quality video and photography production for
-                      commercial, promotional, and documentary purposes.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 bg-[#9C27B0] bg-opacity-10 rounded-full flex items-center justify-center text-[#9C27B0] text-xs">
-                      <Check className="h-3 w-3" />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium text-lg mb-2">
-                      Digital Marketing
-                    </h4>
-                    <p className="text-[#64748B]">
-                      Comprehensive digital marketing strategies including
-                      social media, content marketing, and SEO optimization.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-
-              <div className="mt-8">
-                <Link href="/services">
-                  <Button className="bg-[#9C27B0] hover:bg-opacity-90 text-white px-6 py-2.5 rounded-lg font-medium transition-all transform hover:scale-105">
-                    View All Media Services
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <Link href="/services">
-              <Button className="bg-[#1E293B] hover:bg-opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
-                Explore All Services
+            <Link href="/contact">
+              <Button className="bg-[#334155] hover:bg-[#475569] text-white px-8 py-3 rounded-lg font-medium transition-all">
+                Contact Us for Guidance
               </Button>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#1E293B] to-[#1E293B]">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-poppins font-bold text-3xl md:text-4xl text-white mb-6">
-            Ready to Start Your Project?
-          </h2>
-          <p className="text-[#94A3B8] text-lg mb-8 max-w-2xl mx-auto">
-            Contact us today to discuss how our dual expertise in construction
-            and media can bring your vision to life.
-          </p>
-          <Link href="/contact">
-            <Button className="bg-[#10B981] hover:bg-opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105 text-center">
-              Get in Touch
-            </Button>
-          </Link>
         </div>
       </section>
     </>

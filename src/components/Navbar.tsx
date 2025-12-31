@@ -40,8 +40,9 @@ const Navbar = () => {
                 className="w-full h-full rounded-lg object-cover"
               />
             </div>
-            <span className="font-poppins text-[#0F172A]  font-semibold text-xl">
+            <span className="relative font-poppins font-semibold text-xl text-[#0F172A]">
               RDI
+              <span className="absolute left-0 -bottom-1 w-full h-[3px] bg-gradient-to-r from-[#FFC107] to-[#9C27B0] rounded-full" />
             </span>
           </Link>
 
@@ -62,20 +63,20 @@ const Navbar = () => {
               About
             </Link>
             <Link
-              href="/services"
+              href="/construction"
               className={`nav-link ${
-                location === "/services" ? "text-[#3B82F6]" : ""
+                location === "/construction" ? "text-[#3B82F6]" : ""
               }`}
             >
-              Services
+              Construction
             </Link>
             <Link
-              href="/portfolio"
+              href="/media"
               className={`nav-link ${
-                location === "/portfolio" ? "text-[#3B82F6]" : ""
+                location === "/media" ? "text-[#3B82F6]" : ""
               }`}
             >
-              Portfolio
+              Media
             </Link>
             <Link
               href="/contact"
@@ -139,26 +140,26 @@ const Navbar = () => {
               About
             </Link>
             <Link
-              href="/services"
+              href="/construction"
               className={`font-medium ${
-                location === "/services"
+                location === "/construction"
                   ? "text-[#3B82F6]"
                   : "text-[#0F172A] hover:text-[#3B82F6]"
               } transition-colors`}
               onClick={closeMobileMenu}
             >
-              Services
+              Construction
             </Link>
             <Link
-              href="/portfolio"
+              href="/media"
               className={`font-medium ${
-                location === "/portfolio"
+                location === "/media"
                   ? "text-[#3B82F6]"
                   : "text-[#0F172A] hover:text-[#3B82F6]"
               } transition-colors`}
               onClick={closeMobileMenu}
             >
-              Portfolio
+              Media
             </Link>
             <Link
               href="/contact"
