@@ -7,7 +7,6 @@ import {
   Shield,
   Clock,
   ChevronRight,
-  Play,
   Award,
   Users,
   TrendingUp,
@@ -83,19 +82,6 @@ const Services = () => {
             concept to completion, we deliver exceptional construction
             solutions.
           </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="#services">
-              <button className="bg-[#FFC107] hover:bg-[#FFD54F] text-[#1E293B] px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-xl flex items-center gap-2">
-                Explore Services
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </a>
-            <button className="bg-white bg-opacity-10 hover:bg-opacity-20 text-black border-2 border-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 flex items-center gap-2">
-              <Play className="h-5 w-5" />
-              Watch Video
-            </button>
-          </div>
         </div>
       </section>
 
