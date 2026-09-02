@@ -60,7 +60,15 @@ const PortfolioFilter = ({
       >
         Solar Technology
       </button>
-      
+      {/* <button
+        className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+          activeFilter === "integrated"
+            ? "bg-gradient-to-r from-[#FFC107] to-[#9C27B0] text-white"
+            : "bg-gradient-to-r from-[#FFC107]/10 to-[#9C27B0]/10 hover:from-[#FFC107] hover:to-[#9C27B0] hover:text-white"
+        }`}
+      >
+        Integrated
+      </button> */}
     </div>
   );
 };
