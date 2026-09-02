@@ -1,4 +1,9 @@
-type FilterCategory = "all" | "construction" | "media" | "integrated";
+type FilterCategory =
+  | "all"
+  | "construction"
+  | "media"
+  | "solar"
+  | "integrated";
 
 interface PortfolioFilterProps {
   onFilterChange: (category: FilterCategory) => void;
@@ -44,6 +49,16 @@ const PortfolioFilter = ({
         onClick={() => handleFilterClick("media")}
       >
         Media
+      </button>
+      <button
+        className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+          activeFilter === "solar"
+            ? "bg-[#FBBF24] text-[#0F172A]"
+            : "bg-emerald-50 text-[#047857] hover:bg-[#FBBF24] hover:text-[#0F172A]"
+        }`}
+        onClick={() => handleFilterClick("solar")}
+      >
+        Solar Technology
       </button>
       {/* <button
         className={`px-4 py-2 rounded-lg font-medium transition-colors ${

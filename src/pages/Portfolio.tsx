@@ -1,13 +1,31 @@
 import { useState } from "react";
 import { Play, Award, Users, TrendingUp, X } from "lucide-react";
 import { Link } from "wouter";
+import Seo from "../components/Seo";
+
+type MediaCategory = "all" | "video" | "branding" | "animation" | "commercial";
+
+interface MediaProject {
+  id: number;
+  title: string;
+  category: Exclude<MediaCategory, "all">;
+  client: string;
+  image: string;
+  video: boolean;
+  year: string;
+  description: string;
+  tags: string[];
+  stats: Record<string, string>;
+}
 
 const MediaPortfolio = () => {
-  const [selectedProject, setSelectedProject] = useState<any>(null);
-  const [activeCategory, setActiveCategory] = useState<any>("all");
-  const [hoveredCard, setHoveredCard] = useState<any>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<MediaProject | null>(null);
+  const [activeCategory, setActiveCategory] =
+    useState<MediaCategory>("all");
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const categories = [
+  const categories: { id: MediaCategory; label: string }[] = [
     { id: "all", label: "All Work" },
     { id: "video", label: "Video Production" },
     { id: "branding", label: "Branding" },
@@ -15,7 +33,7 @@ const MediaPortfolio = () => {
     { id: "commercial", label: "Commercials" },
   ];
 
-  const projects = [
+  const projects: MediaProject[] = [
     {
       id: 1,
       title: "Tech Innovation Campaign",
@@ -102,6 +120,11 @@ const MediaPortfolio = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <Seo
+        title="Media Production & Creative Services | RichDad Investments"
+        description="Explore video production, photography, branding, animation, and digital content services from the RichDad Investments media division."
+      />
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1600')] bg-cover bg-center opacity-20"></div>
@@ -116,7 +139,7 @@ const MediaPortfolio = () => {
             </div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+          <h1 className="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl md:text-7xl lg:text-8xl">
             Stories That
             <span className="block bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text">
               Move People
@@ -129,7 +152,7 @@ const MediaPortfolio = () => {
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+          <div className="mt-14 grid grid-cols-2 gap-6 sm:gap-8 md:mt-20 md:grid-cols-4">
             {[
               { icon: Award, label: "Industry Awards", value: "24+" },
               { icon: Users, label: "Happy Clients", value: "150+" },
@@ -152,7 +175,7 @@ const MediaPortfolio = () => {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-white mb-4">
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
               Featured Work
             </h2>
             <p className="text-xl text-gray-400">
@@ -186,12 +209,22 @@ const MediaPortfolio = () => {
                 onMouseEnter={() => setHoveredCard(project.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 onClick={() => setSelectedProject(project)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setSelectedProject(project);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${project.title} project details`}
               >
                 <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-slate-800">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
                   />
 
                   {/* Overlay */}
@@ -247,7 +280,12 @@ const MediaPortfolio = () => {
 
       {/* Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-dialog-title"
+        >
           <div className="bg-slate-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="relative">
               <img
@@ -258,6 +296,7 @@ const MediaPortfolio = () => {
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                aria-label="Close project details"
               >
                 <X className="w-5 h-5 text-white" />
               </button>
@@ -272,7 +311,7 @@ const MediaPortfolio = () => {
 
             <div className="p-8">
               <div className="flex flex-wrap gap-2 mb-4">
-                {selectedProject.tags.map((tag: any, i: any) => (
+                {selectedProject.tags.map((tag, i) => (
                   <span
                     key={i}
                     className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm"
@@ -282,7 +321,10 @@ const MediaPortfolio = () => {
                 ))}
               </div>
 
-              <h2 className="text-4xl font-bold text-white mb-2">
+              <h2
+                id="project-dialog-title"
+                className="mb-2 text-3xl font-bold text-white sm:text-4xl"
+              >
                 {selectedProject.title}
               </h2>
               <p className="text-purple-400 mb-4">
@@ -292,9 +334,7 @@ const MediaPortfolio = () => {
                 {selectedProject.description}
               </p>
 
-              {Object.entries(
-                selectedProject.stats as Record<string, React.ReactNode>
-              ).map(([key, value]) => (
+              {Object.entries(selectedProject.stats).map(([key, value]) => (
                 <div key={key}>
                   <div className="text-2xl font-bold text-white mb-1">
                     {value}
@@ -303,14 +343,11 @@ const MediaPortfolio = () => {
                 </div>
               ))}
 
-              <div className="mt-8 flex gap-4">
-                <button className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-6 py-3 rounded-full font-semibold transition-all">
-                  Start Similar Project
+              <Link href="/contact" className="mt-8 block">
+                <button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white transition-all hover:from-purple-500 hover:to-pink-500">
+                  Start a Similar Project
                 </button>
-                <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-all">
-                  Share
-                </button>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -320,7 +357,7 @@ const MediaPortfolio = () => {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm rounded-3xl p-12 border border-purple-500/20">
-            <h2 className="text-5xl font-bold text-white mb-6">
+            <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
               Let's Create Something Amazing
             </h2>
             <p className="text-xl text-gray-300 mb-8">

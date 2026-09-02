@@ -1,6 +1,10 @@
 import { ArrowRight } from "lucide-react";
 
-export type PortfolioItemType = "construction" | "media" | "integrated";
+export type PortfolioItemType =
+  | "construction"
+  | "media"
+  | "solar"
+  | "integrated";
 
 interface PortfolioItemProps {
   type: PortfolioItemType;
@@ -33,6 +37,12 @@ const PortfolioItem = ({
           text: "text-[#9C27B0]",
           link: "text-[#9C27B0]",
         };
+      case "solar":
+        return {
+          bg: "bg-gradient-to-r from-[#FBBF24]/20 to-[#10B981]/15",
+          text: "text-[#047857]",
+          link: "text-[#047857]",
+        };
       case "integrated":
         return {
           bg: "bg-gradient-to-r from-[#FFC107]/20 to-[#9C27B0]/20",
@@ -52,7 +62,9 @@ const PortfolioItem = ({
           <span
             className={`${styles.bg} ${styles.text} text-xs px-3 py-1 rounded-full font-medium`}
           >
-            {type.charAt(0).toUpperCase() + type.slice(1)}
+            {type === "solar"
+              ? "Solar Technology"
+              : type.charAt(0).toUpperCase() + type.slice(1)}
           </span>
           <span className="text-[#64748B] text-sm">{year}</span>
         </div>

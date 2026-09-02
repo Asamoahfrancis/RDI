@@ -1,74 +1,98 @@
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  MapPin,
-  Phone,
-  Mail,
-} from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1E293B] text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <footer className="bg-[#0F172A] px-4 py-12 text-white sm:py-16">
+      <div className="container mx-auto">
+        <div className="mb-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="flex space-x-2 mb-6 items-center ">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+            <Link
+              href="/"
+              className="mb-5 flex items-center gap-3"
+              aria-label="RichDad Investments home"
+            >
+              <div className="h-12 w-12 overflow-hidden rounded-lg">
                 <img
                   src="/logo.png"
-                  alt="Logo"
-                  className="w-full h-full rounded-lg object-cover"
+                  alt="RichDad Investments"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
                 />
               </div>
-              <span className="font-poppins   text-white font-bold   text-xl">
-                RDI
-              </span>
+              <span className="font-poppins text-xl font-bold">RDI</span>
             </Link>
 
-            <p className="text-[#94A3B8] mb-6">
-              Bridging the gap with excellence
+            <p className="max-w-xs leading-relaxed text-slate-400">
+              Building spaces, shaping stories, and powering progress through
+              three specialized divisions.
             </p>
 
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white transition-colors"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white transition-colors"
-              >
-                <Twitter size={18} />
-              </a>
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white transition-colors"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white transition-colors"
-              >
-                <Linkedin size={18} />
-              </a>
+            <div className="mt-6 flex gap-3">
+              {[
+                { label: "Facebook", icon: Facebook },
+                { label: "Instagram", icon: Instagram },
+                { label: "LinkedIn", icon: Linkedin },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href="#"
+                  aria-label={social.label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-poppins font-semibold text-lg mb-6">
-              Quick Links
-            </h4>
+            <h2 className="mb-5 font-poppins text-lg font-semibold">
+              Our Divisions
+            </h2>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/construction"
+                  className="text-slate-400 transition-colors hover:text-[#FB923C]"
+                >
+                  Construction
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/media"
+                  className="text-slate-400 transition-colors hover:text-[#C084FC]"
+                >
+                  Media Production
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/solar"
+                  className="text-slate-400 transition-colors hover:text-[#FBBF24]"
+                >
+                  Solar Technology
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-slate-400 transition-colors hover:text-white"
+                >
+                  Request a Consultation
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-5 font-poppins text-lg font-semibold">Company</h2>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
+                  className="text-slate-400 transition-colors hover:text-white"
                 >
                   Home
                 </Link>
@@ -76,31 +100,15 @@ const Footer = () => {
               <li>
                 <Link
                   href="/about"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
+                  className="text-slate-400 transition-colors hover:text-white"
                 >
                   About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/portfolio"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contact"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
+                  className="text-slate-400 transition-colors hover:text-white"
                 >
                   Contact
                 </Link>
@@ -109,106 +117,42 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-poppins font-semibold text-lg mb-6">
-              Services
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Commercial Construction
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Residential Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Content Production
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Digital Marketing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  Integrated Solutions
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-poppins font-semibold text-lg mb-6">Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin className="h-5 w-5 mt-1 mr-3 text-[#FFC107]" />
-                <span className="text-[#94A3B8]">
-                  123 Business Avenue
-                  <br />
-                  Suite 400
-                  <br />
-                  San Francisco, CA 94107
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 mr-3 text-[#3B82F6]" />
-                <span className="text-[#94A3B8]">+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 mr-3 text-[#FFC107]" />
-                <span className="text-[#94A3B8]">info@dualcore.com</span>
-              </li>
-            </ul>
+            <h2 className="mb-5 font-poppins text-lg font-semibold">Contact</h2>
+            <address className="not-italic">
+              <ul className="space-y-4 text-slate-400">
+                <li className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#FBBF24]" />
+                  <span>
+                    45 Independence Avenue
+                    <br />
+                    North Ridge, Accra, Ghana
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 shrink-0 text-[#C084FC]" />
+                  <a href="tel:+233301234567" className="hover:text-white">
+                    +233 (0) 30 123 4567
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#34D399]" />
+                  <a
+                    href="mailto:info@richdadinvestments.com"
+                    className="break-all hover:text-white"
+                  >
+                    info@richdadinvestments.com
+                  </a>
+                </li>
+              </ul>
+            </address>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-[#94A3B8] text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} DualCore Industries. All rights
-              reserved.
-            </p>
-
-            <div className="flex space-x-6">
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white text-sm transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white text-sm transition-colors"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-[#94A3B8] hover:text-white text-sm transition-colors"
-              >
-                Sitemap
-              </a>
-            </div>
-          </div>
+        <div className="border-t border-slate-700 pt-8 text-center sm:text-left">
+          <p className="text-sm text-slate-400">
+            &copy; {new Date().getFullYear()} RichDad Investments. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>

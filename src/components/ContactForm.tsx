@@ -62,7 +62,7 @@ const ContactForm = () => {
       });
 
       form.reset();
-    } catch (error) {
+    } catch {
       toast({
         title: "Failed to send message",
         description: "Please try again later or contact us directly.",
@@ -179,8 +179,11 @@ const ContactForm = () => {
                     Construction Services
                   </SelectItem>
                   <SelectItem value="media">Media Services</SelectItem>
+                  <SelectItem value="solar">
+                    Solar Technology Services
+                  </SelectItem>
                   <SelectItem value="integrated">
-                    Integrated Solutions
+                    Multi-Division Project
                   </SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
@@ -214,7 +217,7 @@ const ContactForm = () => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#10B981] hover:bg-opacity-90 text-white font-medium py-3 px-6 rounded-lg transition-all transform hover:scale-105"
+          className="w-full rounded-lg bg-[#0F172A] px-6 py-3 font-medium text-white transition-colors hover:bg-[#1E293B]"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </Button>

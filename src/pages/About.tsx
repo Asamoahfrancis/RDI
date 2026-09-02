@@ -1,350 +1,342 @@
-import { useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
-  Users,
-  Target,
-  Award,
+  ArrowRight,
   Building,
+  CheckCircle2,
   Film,
-  ChevronRight,
-  Sparkles,
+  Lightbulb,
+  Sun,
+  Target,
+  Users,
 } from "lucide-react";
+import { useState } from "react";
+import { Link } from "wouter";
+import Seo from "../components/Seo";
+import { Button } from "../components/ui/button";
+
+type DivisionId = "construction" | "media" | "solar";
+
+interface Division {
+  id: DivisionId;
+  name: string;
+  eyebrow: string;
+  summary: string;
+  promise: string;
+  icon: LucideIcon;
+  items: string[];
+  href: string;
+  buttonActive: string;
+  iconStyle: string;
+  panelStyle: string;
+  linkStyle: string;
+}
+
+const divisions: Division[] = [
+  {
+    id: "construction",
+    name: "Construction",
+    eyebrow: "Building the future, one project at a time",
+    summary:
+      "Our construction division brings together planning, craftsmanship, and project management to deliver commercial and residential spaces that perform beautifully.",
+    promise:
+      "From the first brief to final handover, we keep quality, safety, clear communication, and responsible delivery at the centre of the project.",
+    icon: Building,
+    items: [
+      "Commercial and residential construction",
+      "Renovation and remodelling",
+      "Design-build coordination",
+      "Project management",
+    ],
+    href: "/construction",
+    buttonActive: "bg-[#F97316] text-white shadow-lg",
+    iconStyle: "bg-orange-100 text-[#C2410C]",
+    panelStyle: "border-orange-200 bg-gradient-to-br from-orange-50 to-white",
+    linkStyle: "bg-[#F97316] text-white hover:bg-[#FB923C]",
+  },
+  {
+    id: "media",
+    name: "Media",
+    eyebrow: "Stories that captivate, connect, and convert",
+    summary:
+      "Our media division turns ideas into strong visual experiences through strategy, production, branding, and digital content designed around real audience needs.",
+    promise:
+      "We pair creative direction with disciplined production so every asset supports your message, reflects your identity, and helps move your business forward.",
+    icon: Film,
+    items: [
+      "Video production and photography",
+      "Brand strategy and identity",
+      "Digital marketing content",
+      "Animation and visual storytelling",
+    ],
+    href: "/media",
+    buttonActive: "bg-[#9333EA] text-white shadow-lg",
+    iconStyle: "bg-purple-100 text-[#7E22CE]",
+    panelStyle: "border-purple-200 bg-gradient-to-br from-purple-50 to-white",
+    linkStyle: "bg-[#9333EA] text-white hover:bg-[#A855F7]",
+  },
+  {
+    id: "solar",
+    name: "Solar Technology",
+    eyebrow: "Clean energy for resilient homes and businesses",
+    summary:
+      "Our solar technology division designs and installs practical renewable energy systems, combining solar panels, storage, monitoring, and long-term technical support.",
+    promise:
+      "We assess how you use energy, recommend an appropriate system, install it professionally, and help you protect performance after handover.",
+    icon: Sun,
+    items: [
+      "Residential and commercial solar",
+      "Battery storage solutions",
+      "Energy assessment and system design",
+      "Monitoring, maintenance, and support",
+    ],
+    href: "/solar",
+    buttonActive:
+      "bg-gradient-to-r from-[#FBBF24] to-[#10B981] text-[#0F172A] shadow-lg",
+    iconStyle:
+      "bg-gradient-to-br from-amber-100 to-emerald-100 text-[#047857]",
+    panelStyle:
+      "border-emerald-200 bg-gradient-to-br from-amber-50 via-white to-emerald-50",
+    linkStyle: "bg-[#FBBF24] text-[#0F172A] hover:bg-[#FCD34D]",
+  },
+];
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("construction");
+  const [activeTab, setActiveTab] = useState<DivisionId>("construction");
+  const activeDivision = divisions.find((division) => division.id === activeTab)!;
+  const ActiveIcon = activeDivision.icon;
 
   return (
     <>
-      {/* Page Header */}
-      <section className="bg-[#1E293B] py-16 md:py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="font-poppins font-bold text-4xl md:text-5xl text-white mb-4">
-            About Rich Dad Investments
+      <Seo
+        title="About RichDad Investments | Three Specialized Divisions"
+        description="Learn how RichDad Investments brings construction, media production, and solar technology expertise together to deliver practical, connected solutions."
+      />
+
+      <section className="bg-[#0F172A] px-4 py-16 text-center sm:py-20 md:py-24">
+        <div className="container mx-auto">
+          <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-[#FBBF24]">
+            About RichDad Investments
+          </p>
+          <h1 className="mx-auto max-w-4xl font-poppins text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+            Three disciplines. One connected vision.
           </h1>
-          <p className="text-[#94A3B8] text-lg md:text-xl max-w-2xl mx-auto">
-            Where Construction Excellence Meets Media Innovation
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            We build enduring spaces, create meaningful stories, and deliver
+            cleaner energy systems that help people and businesses move
+            forward.
           </p>
         </div>
       </section>
 
-      {/* Interactive Division Showcase */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1E293B] via-[#334155] to-[#1E293B]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl text-white mb-4">
-              Our Two Powerhouse Divisions
+      <section className="bg-gradient-to-b from-[#0F172A] to-[#1E293B] px-4 py-16 sm:py-24">
+        <div className="container mx-auto">
+          <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+            <h2 className="font-poppins text-3xl font-bold text-white sm:text-4xl">
+              Explore our divisions
             </h2>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              Explore our specialized expertise in construction and media
+            <p className="mt-3 text-lg text-slate-300">
+              Specialized teams, connected by one standard of thoughtful
+              delivery.
             </p>
           </div>
 
-          {/* Tab Buttons */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-white bg-opacity-10 backdrop-blur-sm p-2 rounded-2xl inline-flex gap-2">
+          <div
+            className="mx-auto mb-8 grid max-w-5xl grid-cols-1 gap-3 sm:grid-cols-3"
+            role="tablist"
+            aria-label="RichDad Investments divisions"
+          >
+            {divisions.map((division) => (
               <button
-                onClick={() => setActiveTab("construction")}
-                className={`flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                  activeTab === "construction"
-                    ? "bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-white shadow-lg scale-105"
-                    : "text-black border border-[#94A3B8] hover:bg-white hover:bg-opacity-10"
+                key={division.id}
+                type="button"
+                role="tab"
+                id={`division-tab-${division.id}`}
+                aria-selected={activeTab === division.id}
+                aria-controls="division-panel"
+                onClick={() => setActiveTab(division.id)}
+                className={`flex min-h-14 items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-3 font-semibold transition-all duration-300 ${
+                  activeTab === division.id
+                    ? division.buttonActive
+                    : "bg-white/5 text-slate-200 hover:bg-white/10"
                 }`}
               >
-                <Building className="h-5 w-5" />
-                Construction
+                <division.icon className="h-5 w-5 shrink-0" />
+                {division.name}
               </button>
-              <button
-                onClick={() => setActiveTab("media")}
-                className={`flex items-center gap-2 px-8 py-4  rounded-xl font-semibold transition-all duration-300 ${
-                  activeTab === "media"
-                    ? "bg-gradient-to-r from-[#9C27B0] to-[#BA68C8] text-white    shadow-lg scale-105"
-                    : "text-black border border-gray-300 shadow-2xl  hover:bg-white hover:bg-opacity-10"
-                }`}
-              >
-                <Film className="h-5 w-5" />
-                Media
-              </button>
+            ))}
+          </div>
+
+          <article
+            id="division-panel"
+            role="tabpanel"
+            aria-labelledby={`division-tab-${activeDivision.id}`}
+            key={activeDivision.id}
+            className={`animate-fadeIn mx-auto max-w-5xl rounded-3xl border p-6 shadow-2xl sm:p-8 lg:p-12 ${activeDivision.panelStyle}`}
+          >
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+              <div>
+                <div
+                  className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl ${activeDivision.iconStyle}`}
+                >
+                  <ActiveIcon className="h-8 w-8" />
+                </div>
+                <p className="text-sm font-bold uppercase tracking-[0.15em] text-slate-500">
+                  {activeDivision.eyebrow}
+                </p>
+                <h3 className="mt-3 font-poppins text-3xl font-bold text-slate-900 sm:text-4xl">
+                  {activeDivision.name} Division
+                </h3>
+                <p className="mt-5 text-lg leading-relaxed text-slate-600">
+                  {activeDivision.summary}
+                </p>
+                <Link href={activeDivision.href} className="mt-7 inline-block w-full sm:w-auto">
+                  <Button
+                    className={`w-full px-6 py-5 font-semibold sm:w-auto ${activeDivision.linkStyle}`}
+                  >
+                    Explore {activeDivision.name}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200/80 bg-white/80 p-5 sm:p-6">
+                <h4 className="font-poppins text-xl font-semibold text-slate-900">
+                  Core capabilities
+                </h4>
+                <ul className="mt-5 space-y-4">
+                  {activeDivision.items.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-slate-700">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#059669]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 border-t border-slate-200 pt-6">
+                  <h4 className="font-poppins font-semibold text-slate-900">
+                    Our promise
+                  </h4>
+                  <p className="mt-2 leading-relaxed text-slate-600">
+                    {activeDivision.promise}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-
-          {/* Content Display */}
-          <div className="max-w-5xl mx-auto ">
-            {activeTab === "construction" && (
-              <div className="animate-fadeIn">
-                <div className="bg-gradient-to-br from-[#FFC107] to-[#FFD54F] p-8 md:p-12 rounded-3xl shadow-2xl ">
-                  <div className="flex items-center mb-8">
-                    <div className="w-20 h-20 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                      <Building className="h-10 w-10 text-black" />
-                    </div>
-                    <div className="ml-6">
-                      <h3 className="font-poppins font-bold text-3xl md:text-4xl">
-                        Construction Division
-                      </h3>
-                      <p className="text-white text-opacity-90 text-lg mt-1">
-                        Building the Future, One Project at a Time
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 mb-8">
-                    <div>
-                      <h4 className="font-semibold text-xl mb-4 flex items-center">
-                        <Sparkles className="h-5 w-5 mr-2" />
-                        What We Do
-                      </h4>
-                      <p className="text-white text-opacity-95 leading-relaxed">
-                        Our construction division brings decades of combined
-                        experience in commercial and residential development. We
-                        specialize in innovative building techniques,
-                        sustainable practices, and cutting-edge construction
-                        technology that transforms visions into reality.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-xl mb-4 flex items-center">
-                        <Award className="h-5 w-5 mr-2" />
-                        Our Expertise
-                      </h4>
-                      <div className="space-y-3">
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>
-                            Expert architects, engineers, and project managers
-                          </span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>
-                            Green building and sustainability certifications
-                          </span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>Advanced construction technology and BIM</span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>On-time, on-budget delivery guarantee</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-6">
-                    <h4 className="font-semibold text-xl mb-3">Our Promise</h4>
-                    <p className="text-[#94A3B8] text-opacity-95 leading-relaxed">
-                      From initial design through final construction, we ensure
-                      quality and precision at every step of the building
-                      process. We don't just construct buildings—we create
-                      spaces that inspire, function flawlessly, and stand the
-                      test of time.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === "media" && (
-              <div className="animate-fadeIn">
-                <div className="bg-gradient-to-br from-[#9C27B0] to-[#BA68C8] p-8 md:p-12 rounded-3xl shadow-2xl ">
-                  <div className="flex items-center mb-8">
-                    <div className="w-20 h-20 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                      <Film className="h-10 w-10 text-[#94A3B8]" />
-                    </div>
-                    <div className="ml-6">
-                      <h3 className="font-poppins font-bold text-3xl md:text-4xl">
-                        Media Division
-                      </h3>
-                      <p className="text-white text-opacity-90 text-lg mt-1">
-                        Crafting Stories That Captivate and Convert
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 mb-8">
-                    <div>
-                      <h4 className="font-semibold text-xl mb-4 flex items-center">
-                        <Sparkles className="h-5 w-5 mr-2" />
-                        What We Create
-                      </h4>
-                      <p className="text-white text-opacity-95 leading-relaxed">
-                        Our media division creates compelling digital content,
-                        marketing materials, and immersive experiences that
-                        resonate with audiences. From brand strategy to content
-                        production, we help businesses establish and maintain a
-                        powerful digital presence that drives results.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-xl mb-4 flex items-center">
-                        <Award className="h-5 w-5 mr-2" />
-                        Our Capabilities
-                      </h4>
-                      <div className="space-y-3 ">
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>
-                            Award-winning creative directors and producers
-                          </span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>
-                            State-of-the-art production equipment and studios
-                          </span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>Data-driven digital marketing strategies</span>
-                        </div>
-                        <div className="flex items-start bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3">
-                          <ChevronRight className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>
-                            VR/AR, 3D visualization, and emerging tech
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white  bg-opacity-20 backdrop-blur-sm rounded-2xl p-6">
-                    <h4 className="font-semibold text-xl mb-3">
-                      Our Specialty
-                    </h4>
-                    <p className=" text-opacity-95 leading-relaxed">
-                      We create everything from promotional videos and
-                      architectural visualizations to full-scale brand campaigns
-                      and digital experiences. Our content doesn't just look
-                      good—it tells your story, engages your audience, and
-                      delivers measurable business impact.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          </article>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center space-y-12 md:space-y-0 md:space-x-16">
-            <div className="md:w-1/2">
-              <div className="relative">
-                <img
-                  src="/36.jpg"
-                  alt="Rich Dad Investments Team"
-                  className="rounded-lg shadow-xl w-full z-10 relative"
-                />
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#FFC107] rounded-lg hidden md:block"></div>
-                <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#9C27B0] rounded-lg hidden md:block"></div>
-              </div>
-            </div>
+      <section className="bg-white px-4 py-16 sm:py-24">
+        <div className="container mx-auto grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="relative">
+            <img
+              src="/36.jpg"
+              alt="The RichDad Investments team collaborating"
+              className="relative z-10 aspect-[4/3] w-full rounded-2xl object-cover shadow-xl"
+              loading="lazy"
+            />
+            <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-xl bg-[#10B981] md:block" />
+            <div className="absolute -left-4 -top-4 hidden h-24 w-24 rounded-xl bg-[#FBBF24] md:block" />
+          </div>
 
-            <div className="md:w-1/2">
-              <h2 className="font-poppins font-semibold text-3xl md:text-4xl mb-6">
-                Our Story
-              </h2>
-              <p className="text-[#64748B] mb-6">
-                Founded in 2015, Rich Dad Investments emerged from a vision to
-                bridge the gap between physical construction and digital media.
-                What began as two separate ventures merged into a powerful
-                synergy that provides comprehensive solutions to our clients.
+          <div>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-[#B45309]">
+              Our story
+            </p>
+            <h2 className="font-poppins text-3xl font-bold text-slate-900 sm:text-4xl">
+              Expertise that grows with the needs of our clients
+            </h2>
+            <div className="mt-6 space-y-5 leading-relaxed text-slate-600">
+              <p>
+                RichDad Investments began with a vision to combine physical
+                construction expertise with the creative power of digital
+                media. That connected approach gave clients fewer handoffs and
+                a more consistent path from idea to delivery.
               </p>
-              <p className="text-[#64748B] mb-6">
-                Our founders, with backgrounds in architecture and digital
-                marketing respectively, recognized that modern projects often
-                required both physical building expertise and digital presence
-                creation. Instead of clients needing to work with multiple
-                companies, Rich Dad Investments was established to offer
-                seamless integration of both worlds.
+              <p>
+                As reliable, sustainable power became increasingly important
+                to the homes and businesses we serve, Solar Technology became
+                our third specialized division. It extends the same practical
+                mindset into energy assessment, solar installation, storage,
+                monitoring, and support.
               </p>
-              <p className="text-[#64748B]">
-                Today, we've grown to a team of over 50 professionals spanning
-                architects, engineers, project managers, designers, developers,
-                filmmakers, content creators, and marketing specialists. This
-                diverse expertise allows us to handle projects from concept to
-                completion with an integrated approach that saves time, reduces
-                costs, and delivers superior results.
+              <p>
+                Today, our teams can work independently or together—building a
+                facility, communicating its story, and helping power its future.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What Sets Us Apart */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1E293B] to-[#334155]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins font-bold text-3xl md:text-4xl text-white mb-4">
-              What Sets Us Apart
+      <section className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] px-4 py-16 sm:py-24">
+        <div className="container mx-auto">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <h2 className="font-poppins text-3xl font-bold text-white sm:text-4xl">
+              What sets us apart
             </h2>
-            <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
-              Our unique dual expertise creates value that single-focus
-              companies simply cannot match
+            <p className="mt-4 text-lg text-slate-300">
+              Connected expertise creates more options and a clearer experience
+              for every client.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-xl border border-white border-opacity-20 hover:bg-opacity-15 transition-all">
-              <div className="w-12 h-12 bg-[#FFC107] rounded-lg flex items-center justify-center mb-6">
-                <Users className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-poppins font-semibold text-xl text-white mb-4">
-                Integrated Teams
-              </h3>
-              <p className="text-[#94A3B8]">
-                Our construction and media professionals work side-by-side from
-                day one, ensuring seamless coordination and unified vision
-                throughout your project.
-              </p>
-            </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: Users,
+                title: "Collaborative teams",
+                text: "Construction, media, and solar specialists can coordinate around one brief and one shared outcome.",
+                color: "bg-[#F97316]",
+              },
+              {
+                icon: Lightbulb,
+                title: "Practical innovation",
+                text: "We choose technology and creative approaches for their real-world value, not novelty alone.",
+                color: "bg-[#9333EA]",
+              },
+              {
+                icon: Target,
+                title: "Purposeful delivery",
+                text: "Every solution is shaped around your goals, constraints, users, and long-term success.",
+                color: "bg-[#10B981]",
+              },
+            ].map((item) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
+              >
+                <div
+                  className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl ${item.color}`}
+                >
+                  <item.icon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-poppins text-xl font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-slate-300">{item.text}</p>
+              </article>
+            ))}
+          </div>
 
-            <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-xl border border-white border-opacity-20 hover:bg-opacity-15 transition-all">
-              <div className="w-12 h-12 bg-[#9C27B0] rounded-lg flex items-center justify-center mb-6">
-                <Award className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-poppins font-semibold text-xl text-white mb-4">
-                Proven Track Record
-              </h3>
-              <p className="text-[#94A3B8]">
-                With over 200 successful projects completed, we've demonstrated
-                our ability to deliver exceptional results across diverse
-                industries and project scales.
-              </p>
-            </div>
-
-            <div className="bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-xl border border-white border-opacity-20 hover:bg-opacity-15 transition-all">
-              <div className="w-12 h-12 bg-[#10B981] rounded-lg flex items-center justify-center mb-6">
-                <Target className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-poppins font-semibold text-xl text-white mb-4">
-                Holistic Approach
-              </h3>
-              <p className="text-[#94A3B8]">
-                We don't just build structures or create content—we develop
-                comprehensive solutions that align your physical and digital
-                presence with your business goals.
-              </p>
-            </div>
+          <div className="mt-12 text-center">
+            <Link href="/contact" className="inline-block w-full sm:w-auto">
+              <Button className="w-full bg-white px-7 py-6 font-semibold text-[#0F172A] hover:bg-slate-100 sm:w-auto">
+                Talk to Our Team
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
       <style>{`
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.4s ease-out;
+        .animate-fadeIn { animation: fadeIn 0.35s ease-out; }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-fadeIn { animation: none; }
         }
       `}</style>
     </>

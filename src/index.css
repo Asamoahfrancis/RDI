@@ -3,7 +3,7 @@
 @theme inline {
   --font-sans: Inter, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  --font-poppins: Poppinsf, sans-serif, Cambria, "Times New Roman", Times, serif;
+  --font-poppins: Poppins, sans-serif, Cambria, "Times New Roman", Times, serif;
 }
 
 :root {
@@ -28,9 +28,11 @@
   --ring: 215 16% 47%;
   --radius: 0.5rem;
 
-  /* DualCore specific colors */
+  /* RichDad Investments division colors */
   --construction: 25 95% 53%;
-  --media: 217 91% 60%;
+  --media: 271 81% 56%;
+  --solar: 160 84% 39%;
+  --solar-gold: 45 93% 47%;
   --dark: 217 33% 17%;
   --light: 217 20% 65%;
   --accent: 160 84% 39%;
@@ -277,13 +279,16 @@ html {
 }
 
 @layer base {
-  /* * {
-    @apply border-border;
+  body {
+    @apply font-sans antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
-  body {
-    @apply font-sans antialiased bg-background text-foreground;
-  } */
+  :focus-visible {
+    outline: 3px solid #fbbf24;
+    outline-offset: 3px;
+  }
 
   h1,
   h2,
@@ -306,7 +311,7 @@ html {
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#FFC107] to-[#9C27B0] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#F97316] via-[#A855F7] to-[#10B981] bg-clip-text text-transparent;
   }
 
   .nav-link {
@@ -330,5 +335,19 @@ html {
     content: "";
     @apply absolute bottom-0 left-0 w-full h-[100px] bg-gradient-to-br from-[#FFC107] to-[#9C27B0] z-10;
     clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

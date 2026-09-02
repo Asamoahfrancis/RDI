@@ -1,6 +1,23 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
+
+const navItems = [
+  { href: "/", label: "Home", activeColor: "text-[#B45309]" },
+  { href: "/about", label: "About", activeColor: "text-[#B45309]" },
+  {
+    href: "/construction",
+    label: "Construction",
+    activeColor: "text-[#EA580C]",
+  },
+  { href: "/media", label: "Media", activeColor: "text-[#9333EA]" },
+  {
+    href: "/solar",
+    label: "Solar Technology",
+    activeColor: "text-[#047857]",
+  },
+  { href: "/contact", label: "Contact", activeColor: "text-[#B45309]" },
+];
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -8,99 +25,72 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
+  useEffect(() => {
     setMobileMenuOpen(false);
-  };
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location]);
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white shadow-md transition-all ${
-        scrolled ? "py-2" : "py-3"
+      className={`sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md transition-all ${
+        scrolled ? "py-1 shadow-lg" : "py-2 shadow-sm"
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-18 h-18 rounded-lg flex items-center justify-center">
+        <div className="flex items-center justify-between gap-6">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2"
+            aria-label="RichDad Investments home"
+          >
+            <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg sm:h-16 sm:w-16">
               <img
                 src="/logo.png"
-                alt="Logo"
-                className="w-full h-full rounded-lg object-cover"
+                alt="RichDad Investments"
+                className="h-full w-full object-cover"
               />
             </div>
-            <span className="relative font-poppins font-semibold text-xl text-[#0F172A]">
+            <span className="relative font-poppins text-xl font-semibold text-[#0F172A]">
               RDI
-              <span className="absolute left-0 -bottom-1 w-full h-[3px] bg-gradient-to-r from-[#FFC107] to-[#9C27B0] rounded-full" />
+              <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-[#F97316] via-[#A855F7] to-[#10B981]" />
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className={`nav-link ${location === "/" ? "text-[#FFC107]" : ""}`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className={`nav-link ${
-                location === "/about" ? "text-[#FFC107]" : ""
-              }`}
-            >
-              About
-            </Link>
-            <Link
-              href="/construction"
-              className={`nav-link ${
-                location === "/construction" ? "text-[#3B82F6]" : ""
-              }`}
-            >
-              Construction
-            </Link>
-            <Link
-              href="/media"
-              className={`nav-link ${
-                location === "/media" ? "text-[#3B82F6]" : ""
-              }`}
-            >
-              Media
-            </Link>
-            <Link
-              href="/contact"
-              className={`nav-link ${
-                location === "/contact" ? "text-[#FFC107]" : ""
-              }`}
-            >
-              Contact
-            </Link>
+          <nav
+            className="hidden items-center gap-5 xl:flex"
+            aria-label="Primary navigation"
+          >
+            {navItems.map((item) => {
+              const isActive = location === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`nav-link whitespace-nowrap text-sm 2xl:text-base ${
+                    isActive ? item.activeColor : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* CTA Button
-          <Link href="/contact" className="hidden md:block">
-            <Button className="bg-[#10B981] hover:bg-opacity-90 text-white px-5 py-2.5 rounded-lg font-medium transition-all transform hover:scale-105">
-              Get Quote
-            </Button>
-          </Link> */}
-
-          {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden text-[#0F172A] hover:text-[#FFC107]"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
+            className="rounded-lg p-2 text-[#0F172A] transition-colors hover:bg-slate-100 hover:text-[#B45309] xl:hidden"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={
+              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" />
@@ -110,68 +100,27 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         <nav
-          className={`md:hidden mt-4 pb-4 ${
-            mobileMenuOpen ? "block" : "hidden"
-          }`}
+          id="mobile-navigation"
+          className={`xl:hidden ${mobileMenuOpen ? "block" : "hidden"}`}
+          aria-label="Mobile navigation"
         >
-          <div className="flex flex-col space-y-4">
-            <Link
-              href="/"
-              className={`font-medium ${
-                location === "/"
-                  ? "text-[#FFC107]"
-                  : "text-[#0F172A] hover:text-[#FFC107]"
-              } transition-colors`}
-              onClick={closeMobileMenu}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className={`font-medium ${
-                location === "/about"
-                  ? "text-[#FFC107]"
-                  : "text-[#0F172A] hover:text-[#FFC107]"
-              } transition-colors`}
-              onClick={closeMobileMenu}
-            >
-              About
-            </Link>
-            <Link
-              href="/construction"
-              className={`font-medium ${
-                location === "/construction"
-                  ? "text-[#3B82F6]"
-                  : "text-[#0F172A] hover:text-[#3B82F6]"
-              } transition-colors`}
-              onClick={closeMobileMenu}
-            >
-              Construction
-            </Link>
-            <Link
-              href="/media"
-              className={`font-medium ${
-                location === "/media"
-                  ? "text-[#3B82F6]"
-                  : "text-[#0F172A] hover:text-[#3B82F6]"
-              } transition-colors`}
-              onClick={closeMobileMenu}
-            >
-              Media
-            </Link>
-            <Link
-              href="/contact"
-              className={`font-medium ${
-                location === "/contact"
-                  ? "text-[#FFC107]"
-                  : "text-[#0F172A] hover:text-[#FFC107]"
-              } transition-colors`}
-              onClick={closeMobileMenu}
-            >
-              Contact
-            </Link>
+          <div className="grid gap-1 border-t border-slate-100 py-3">
+            {navItems.map((item) => {
+              const isActive = location === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`rounded-lg px-3 py-3 font-medium transition-colors hover:bg-slate-50 ${
+                    isActive ? item.activeColor : "text-[#0F172A]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </nav>
       </div>

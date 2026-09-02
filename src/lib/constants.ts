@@ -64,6 +64,17 @@ export const portfolioProjects: PortfolioProject[] = [
     year: "2022",
     slug: "luxury-brand-product-launch",
   },
+  {
+    id: 6,
+    type: "solar",
+    title: "Commercial Solar Energy System",
+    description:
+      "A tailored rooftop solar and battery solution designed to support reliable day-to-day business operations.",
+    imageSrc:
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80",
+    year: "2024",
+    slug: "commercial-solar-energy-system",
+  },
   // {
   //   id: 6,
   //   type: "integrated",
@@ -120,6 +131,29 @@ export const constructionServices = [
     title: "Sustainable Building",
     description:
       "Green building practices and sustainable construction solutions that minimize environmental impact.",
+  },
+];
+
+export const solarServices = [
+  {
+    title: "Residential Solar",
+    description:
+      "Tailored solar panel and battery solutions for reliable household energy.",
+  },
+  {
+    title: "Commercial Solar",
+    description:
+      "Scalable renewable energy systems for offices, facilities, schools, and industrial operations.",
+  },
+  {
+    title: "Battery Storage",
+    description:
+      "Energy storage solutions that keep essential equipment powered when grid supply is unavailable.",
+  },
+  {
+    title: "Monitoring & Maintenance",
+    description:
+      "System monitoring, inspection, cleaning, diagnostics, and long-term performance support.",
   },
 ];
 
